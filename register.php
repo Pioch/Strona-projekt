@@ -12,20 +12,26 @@
     $spr1 = mysqli_fetch_array(mysqli_query($db_conn, "SELECT COUNT(*) FROM users WHERE user_fullname='$user_fullname' LIMIT 1")); //czy user o takim nicku istnieje
     $spr2 = mysqli_fetch_array(mysqli_query($db_conn, "SELECT COUNT(*) FROM users WHERE user_email='$email' LIMIT 1")); // czy user o takim emailu istnieje
 
-    if($spr1 != 0) {
+
+    if($spr1[0] != 0) {
+
         echo "Podana nazwa użytkownika już istnieje";
+
     }
 
-    if($spr2 != 0) {
+    if($spr2[0] != 0) {
+
         echo "Taki email już istnieje";
+
     }
 
     if(strlen($user_password) < 8) {
         echo "Hasło musi zawierać minimum 8 znaków";
     }
-    else {
+
+    if($spr1[0] == 0 && $spr2[0] == 0 && strlen($user_password) > 8) {
         if($spr1 && $spr2 && $user_password == $user_re_password) {
-            if(mysqli_query($db_conn, "INSERT INTO users (user_fullname, user_email, user_passwordhash) VALUES('$user_fullname', '$user_email', '$user_passwordhash')")) {
+            if(mysqli_query($db_conn, "INSERT INTO users (user_fullname, user_email, user_passwordhash, user_access_level) VALUES('$user_fullname', '$user_email', '$user_passwordhash', 10)")) {
                 echo "Rejestracja przebiegła poprawnie";
             } 
             else {
