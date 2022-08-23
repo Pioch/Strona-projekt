@@ -14,6 +14,6 @@
 
     // Finally, destroy the session.
     session_destroy();
-    header('Location: /index.html') ;
+    header('Location: /index.html');
 
 ?>

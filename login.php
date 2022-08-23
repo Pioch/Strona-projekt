@@ -11,14 +11,19 @@
         $hash = $record["user_passwordhash"];
 
         if(password_verify($user_password, $hash)) {
+            session_start();
             $_SESSION["current_user"] = $record["user_id"];
+            $_SESSION["user_name"] = $record["user_fullname"];
+            $_SESSION["access_level"] = $record["user_access_level"];
+   
         }
      }
 
      if (isset($_SESSION["current_user"])){
         /* Użytkownik jest zalogowany */
         echo "Zalogowano";
-        header('Location: /strona.html');
+        header('Location: /blender_projekt.html');
+        
 
      } else {
         /* Użytkownik nie jest zalogowany */
@@ -26,4 +31,3 @@
      }
 
 ?>
-

@@ -1,0 +1,32 @@
+#layer_blender {
+    position: absolute;
+    width: 1750px;
+    height: 800px;
+    border: 2px solid;
+}
+
+#layer_buttons {
+    position: absolute;
+    left: 1752px;
+    width: 170px;
+    height: 800px;
+    border: 2px solid;
+}
+
+.label_form {
+    width: 15px;
+}
+
+.margin_class {
+    margin-top: 5px;
+}
+
+#inputfile {
+    font-size: 13px;
+    width: 165px;
+}
+
+#login {
+    font-size: 18px;
+    font-weight: bold;
+}
