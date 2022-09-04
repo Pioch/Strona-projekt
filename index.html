@@ -4,17 +4,28 @@
         <title>Strona</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="index.css">
+        <link href="libs/bootstrap.min.css?v=5.10" rel="stylesheet" type="text/css">
+        <script src="libs/popper.min.js?v=4.13" type="text/javascript"></script>
+        <script src="libs/bootstrap.min.js?v=5.10" type="text/javascript"></script>
         <script src="index.js"></script>
     </head>
 
     <body>
+        <a class="btn btn-primary" href="register.html" role="button">Rejestracja</a>
+        <div id="login_form">
+            <form method="POST" action="php/login.php" autocomplete="off">
+                <div class="mb-3">
+                    <label class="form-label"><b>Login:</b></label>
+                    <input class="form-control" type="text" name="login">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><b>Hasło:</b></label>
+                    <input type="password" class="form-control" name="password">
+                </div>
+                <button type="submit" class="btn btn-primary" name="loguj">Zaloguj</button>
+            </form>
+        </div>
         
-        <form method="POST" action="login.php">
-            <b>Login:</b> <input type="text" name="login"><br>
-            <b>Hasło:</b> <input type="password" name="password"><br>
-            <input type="submit" value="submit" name="loguj">
-        </form>
-        <button><a href="register.html">Rejestracja</a></button>
-
+        
     </body>
 </html>

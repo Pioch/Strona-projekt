@@ -1,4 +1,4 @@
-$.getJSON('get_user_data.php', (data) => {
+$.getJSON('php/get_user_data.php', (data) => {
     login = data;
     $('#login').text(login);
 

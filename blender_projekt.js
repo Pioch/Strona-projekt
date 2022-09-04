@@ -361,3 +361,126 @@ function checkCollision(pos_x, pos_y, pos_z, dim_x, dim_y, dim_z) {
     return draw;
    
 }
+
+function saveToDB() {
+    var data = {"objects_1_layer": [], "new_objects": []};
+    for(let i = 0; i <= Bobject.blenderObjects.children.length-1; i++) {
+        let obj = Bobject.blenderObjects.children[i];
+        if(typeof obj.added == "boolean") {
+            let obj_data = {"name": '', "added": false};
+    
+            obj_data.name = obj.name;
+            obj_data.added = obj.added;
+            data.objects_1_layer.push(obj_data);
+        }
+        else if(obj.added) {
+            let obj_data = {"name": '', "color": '', "position": [], "size": [], "added": []};
+    
+            obj_data.name = obj.name;
+            obj_data.color = obj.color;
+            obj_data.position = obj.position;
+            obj_data.size = obj.size;
+            obj_data.added = obj.added;
+            data.new_objects.push(obj_data); 
+        }
+    }
+
+    var save_JSON = JSON.stringify(data);
+
+    $.ajax({
+        type: "POST",
+        url: "php/save_blender_json.php",
+        data: save_JSON,
+        success: function() {
+            console.log("Zapisano");
+        }
+    })
+}
+
+var loaded_json_db = {};
+function readFromDB() {
+    $.getJSON('php/get_saved_data.php', (data) => {
+        loaded_json_db = data;
+    }).done(() => {
+        //wyświetlenie odczytanych zapisów
+        html = '';
+
+        for(let i = 0; i <= loaded_json_db.length-1; i++) {
+            html += '<option value=' + i + '> Zapis ' + i + '&nbsp&nbsp&nbsp data zapisu: ' + loaded_json_db[i].data + '</option>';
+        }
+
+        $('#saved_data').html(html);
+    });
+
+}
+
+function loadFromDB() {
+    var loaded_text = loaded_json_db[$('#saved_data').val()].saved_json;
+    var parsed_text = JSON.parse(loaded_text);
+
+    if(parsed_text != null) {
+        var to_delete = [];
+        for(let i = 0; i <= Bobject.blenderObjects.children.length-1; i++) {
+                let obj = Bobject.blenderObjects.children[i];
+            if(obj.name.slice(0, 4) == "Cube" || obj.name.slice(2, 6) == "Cube") {
+                to_delete.push(obj);
+                
+            }
+        }
+
+        for(let i = 0; i <= to_delete.length-1; i++) {
+            Bobject.blender.removeCube(to_delete[i].name);
+        }
+
+        for(let i = 0; i <= parsed_text.objects_1_layer.length-1; i++) {
+            Bobject.getObject(parsed_text.objects_1_layer[i].name).added = parsed_text.objects_1_layer[i].added;
+        }
+
+        for(let i = 0; i <= parsed_text.new_objects.length-1; i++) {
+            let obj = parsed_text.new_objects[i];
+            Bobject.blender.createBox(obj.position.x, obj.position.y, obj.position.z, obj.name, obj.color, obj.size.x, obj.size.y, obj.size.z);
+            new_objects.push(obj.name);
+        }
+
+    }
+}
+
+function controlsInfo() {
+    var html = '<div id="controlsInfo">';
+
+        //wiersz
+        html += '<div class="row" style="text-align: center; margin-top: 10px">';
+        html += '<label>LPM - Utworzenie klocka</label>';
+        html += '</div>';
+
+        html += '<div class="row" style="text-align: center; margin-top: 10px">';
+        html += '<label>CTRL + LPM - Usunięcie klocka</label>';
+        html += '</div>';
+
+        html += '</div>';
+
+        BootstrapDialog.show({
+            type: 'type-primary',
+
+            title: 'Sterowanie',
+
+            message: html,
+
+            size: 'size-auto',
+
+            buttons: [
+                {
+                    label: 'Zamknij',
+                    action: function (dialog) {
+                        dialog.close();
+                    }
+                }],
+
+            draggable: true,
+            onshow: function (dialog) {
+                dialog.getModalHeader().css({ 'cursor': 'move' });
+            }
+
+
+        });
+}

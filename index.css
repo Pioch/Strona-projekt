@@ -1,0 +1,22 @@
+#login_form {
+    position: absolute;
+    left: 800px;
+    top: 250px;
+    width: 234px;
+    height: 220px;
+    border: 2px solid;
+    border-radius: 4px;
+}
+
+#login_form button {
+    margin-left: 5px;
+}
+
+#login_form input {
+    width: 220px;
+    margin-left: 5px;
+}
+
+#login_form label {
+    margin-left: 5px;
+}
