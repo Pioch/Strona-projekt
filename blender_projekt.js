@@ -346,12 +346,14 @@ function checkCollision(pos_x, pos_y, pos_z, dim_x, dim_y, dim_z) {
     if(Bobject.blender.scena.scene.getObjectByName("Cubes").children.length > 0) {
         for(let i = 0; i <= Bobject.blender.scena.scene.getObjectByName("Cubes").children.length-1; i++) {
             let obj = Bobject.blender.scena.scene.getObjectByName("Cubes").children[i];
-            let d_x = Math.abs(pos_x - obj.position.x);
-            let d_y = Math.abs(pos_y - obj.position.y);
-            let d_z = Math.abs(pos_z - obj.position.z);
+            let d_x = Math.abs(pos_x - obj.position.x) + 0.001;
+            let d_y = Math.abs(pos_y - obj.position.y) + 0.001;
+            let d_z = Math.abs(pos_z - obj.position.z) + 0.001;
             
             if(d_x < (dim_x + obj.size.x/2) && d_y < (dim_y + obj.size.y/2) && d_z < (dim_z + obj.size.z/2)) {
                 draw = 0;
+                console.log(d_x);
+                console.log(dim_x + obj.size.x/2);
                 break;   
             }
     

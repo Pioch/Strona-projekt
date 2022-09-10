@@ -15,24 +15,31 @@
 
     if($spr1[0] != 0) {
 
-        echo "Podana nazwa użytkownika już istnieje";
+        echo 'Podana nazwa użytkownika już istnieje'. "<br>\n";
 
     }
 
     if($spr2[0] != 0) {
+        echo "Taki email już istnieje". "<br>\n";
+    }
 
-        echo "Taki email już istnieje";
+    if(strlen($user_fullname) < 1) {
+        echo 'Niepoprawna nazwa użytkownika'. "<br>\n";
+    }
 
+    if(!strpos($user_email, '@')) {
+        echo 'Niepoprawny email'. "<br>\n";
     }
 
     if(strlen($user_password) < 8) {
-        echo "Hasło musi zawierać minimum 8 znaków";
+        echo 'Hasło musi zawierać minimum 8 znaków'. "<br>\n";
     }
 
+    
     if($spr1[0] == 0 && $spr2[0] == 0 && strlen($user_password) > 8) {
         if($spr1 && $spr2 && $user_password == $user_re_password) {
             if(mysqli_query($db_conn, "INSERT INTO users (user_fullname, user_email, user_passwordhash, user_access_level) VALUES('$user_fullname', '$user_email', '$user_passwordhash', 10)")) {
-                echo "Rejestracja przebiegła poprawnie";
+                header('Location: /index.html');
             } 
             else {
                 echo "Nieoczekiwany błąd - użytkownik już istnieje lub błąd serwera MySQL.";
