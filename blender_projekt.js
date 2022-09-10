@@ -352,8 +352,6 @@ function checkCollision(pos_x, pos_y, pos_z, dim_x, dim_y, dim_z) {
             
             if(d_x < (dim_x + obj.size.x/2) && d_y < (dim_y + obj.size.y/2) && d_z < (dim_z + obj.size.z/2)) {
                 draw = 0;
-                console.log(d_x);
-                console.log(dim_x + obj.size.x/2);
                 break;   
             }
     
