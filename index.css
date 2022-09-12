@@ -20,3 +20,9 @@
 #login_form label {
     margin-left: 5px;
 }
+
+#menu {
+    position: absolute;
+    width: 1920px;
+    height: 50px;
+}
