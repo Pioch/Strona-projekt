@@ -1,7 +1,11 @@
 #register_form {
     position: absolute;
     left: 40%;
-    top: 30%;
+    top: 25%;
+    width: 234px;
+    height: 390px;
+    border: 2px solid;
+    border-radius: 4px;
 }
 
 #register_form button {
