@@ -35,6 +35,10 @@
         echo 'Hasło musi zawierać minimum 8 znaków'. "<br>\n";
     }
 
+    if($user_password != $user_re_password) {
+        echo 'Podano różne hasła'. "<br>\n";
+    }
+
     
     if($spr1[0] == 0 && $spr2[0] == 0 && strlen($user_password) > 8) {
         if($spr1 && $spr2 && $user_password == $user_re_password) {
