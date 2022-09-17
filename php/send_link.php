@@ -16,7 +16,7 @@
         $email_hash = md5($record['user_email']);
         $pass=$record['user_passwordhash'];
     
-        $link="<a href='https://partisan-armadillo-0984.dataplicity.io/reset_pass.php?key=".$email_hash."&reset=".$pass."'>Click To Reset password</a>";
+        $link="<a href='https://partisan-armadillo-0984.dataplicity.io/php/reset_pass.php?key=".$email_hash."&reset=".$pass."'>Click To Reset password</a>";
 
         $mail = new PHPMailer\PHPMailer\PHPMailer();
         $mail->IsSMTP(); // enable SMTP
@@ -31,7 +31,7 @@
         $mail->AddAddress($email);
         $mail->Subject  =  'Reset Password';
         $mail->IsHTML(true);
-        $mail->Body = 'Click On This Link to Reset Password '.$pass.'';
+        $mail->Body = 'Click On This Link to Reset Password '.$link.'';
         if($mail->Send())
         {
           echo 'Sprawdź maila i kliknij na otrzymane łącze';

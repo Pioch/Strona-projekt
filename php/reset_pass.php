@@ -6,7 +6,7 @@ if($_GET['key'] && $_GET['reset'])
     $email=$_GET['key'];
     $pass=$_GET['reset'];
 
-    $select=mysqli_query($db_conn, "select email, password from users where md5(user_email)='$email' user_passwordhash='$pass'");
+    $select=mysqli_query($db_conn, "select user_email, user_passwordhash from users where md5(user_email)='$email' and user_passwordhash='$pass'");
     if(mysqli_num_rows($select)==1)
     {
         ?>
