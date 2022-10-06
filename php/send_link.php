@@ -1,6 +1,5 @@
 <?php
     require "db_connection.php";
-    //require "mailer/files/db_connection2.php";
     include "mailer/files/Exception.php";
     include "mailer/files/PHPMailer.php";
     include "mailer/files/SMTP.php" ;
@@ -27,7 +26,7 @@
         $mail->Password = 'pbfhtruljczcbbtg';
         $mail->SMTPSecure = "ssl"; 
         $mail->From='pitertest0408@gmail.com';
-        $mail->FromName='Piotr';
+        $mail->FromName='Raspberry';
         $mail->AddAddress($email);
         $mail->Subject  =  'Reset Password';
         $mail->IsHTML(true);
