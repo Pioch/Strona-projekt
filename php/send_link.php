@@ -34,6 +34,7 @@
         $mail->Body = 'Click On This Link to Reset Password '.$link.'';
         if($mail->Send())
         {
+          header('Location: /index.html');
           echo 'Sprawdź maila i kliknij na otrzymane łącze';
         }
         else
