@@ -4,7 +4,7 @@
     include "mailer/files/PHPMailer.php";
     include "mailer/files/SMTP.php" ;
 
-
+    session_start();
     $input_email = mysqli_real_escape_string($db_conn, $_POST["email"]);
 
     $query_user = mysqli_query($db_conn, "SELECT * FROM users WHERE user_email='$input_email'");
@@ -33,8 +33,10 @@
         $mail->Body = 'Click On This Link to Reset Password '.$link.'';
         if($mail->Send())
         {
+          $alert = "Link do zresetowania hasła został wysłany";
+          $_SESSION['alert'] = $alert;
           header('Location: /index.html');
-          echo 'Sprawdź maila i kliknij na otrzymane łącze';
+          //echo 'Sprawdź maila i kliknij na otrzymane łącze';
         }
         else
         {

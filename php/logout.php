@@ -1,5 +1,4 @@
 <?php
-
     $_SESSION = array();
     
     // If it's desired to kill the session, also delete the session cookie.
@@ -13,7 +12,6 @@
     }
 
     // Finally, destroy the session.
-    session_destroy();
     header('Location: /index.html');
-
+    session_destroy();
 ?>

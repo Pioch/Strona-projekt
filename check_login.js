@@ -1,5 +1,5 @@
 $.getJSON('php/get_user_data.php', (data) => {
-    login = data;
+    var login = data;
     $('#login').text(login);
 
     if(login == null) {

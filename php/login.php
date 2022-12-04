@@ -1,6 +1,8 @@
 <?php
     require('db_connection.php');
 
+    session_start();
+
     $user_login = mysqli_real_escape_string($db_conn, $_POST["login"]);
     $user_password = mysqli_real_escape_string($db_conn, $_POST["password"]);
 
@@ -11,7 +13,6 @@
         $hash = $record["user_passwordhash"];
 
         if(password_verify($user_password, $hash)) {
-            session_start();
             $_SESSION["current_user"] = $record["user_id"];
             $_SESSION["user_name"] = $record["user_fullname"];
             $_SESSION["access_level"] = $record["user_access_level"];
@@ -21,13 +22,14 @@
 
      if (isset($_SESSION["current_user"])){
         /* Użytkownik jest zalogowany */
-        echo "Zalogowano";
+        $_SESSION['alert'] = "Zalogowano";
         header('Location: /blender_projekt.html');
-        
 
      } else {
         /* Użytkownik nie jest zalogowany */
-        echo "Błąd logowania";
+        $_SESSION['alert'] =  "Błąd logowania";
+        header('Location: /index.html');
+
      }
 
 ?>
